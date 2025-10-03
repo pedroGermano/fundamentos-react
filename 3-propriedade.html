@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rocketseat - React.js - Componentes</title>
+    <title>Rocketseat - React.js - Propriedade</title>
   </head>
   <body>
     <div id="root"></div>
@@ -12,11 +12,15 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
-      function Button() {
+      const buttonVariables = {
+        default: "bg-gray-500",
+        primary: "bg-purple-500",
+      };
+      function Button({ children, variant }) {
         return (
           <>
-            <button className="px-3 py-2 bg-purple-500 rounded text-white">
-              Ola
+            <button className={`px-3 py-2 rounded ${buttonVariables[variant]}`}>
+              {children}
             </button>
           </>
         );
@@ -24,9 +28,9 @@
 
       function App() {
         return (
-          <main className="flex gap-2 p-3">
-            <Button />
-            <Button />
+          <main className="flex gap-2 p-3 text-white">
+            <Button variant="default">Meu botão</Button>
+            <Button variant="primary">Meu botão</Button>
           </main>
         );
       }
