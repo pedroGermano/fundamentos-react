@@ -29,7 +29,7 @@
       }
     </style>
   </head>
-  <body class="text-(--text) font-(--font-sans)">
+  <body className="text-(--text) font-(--font-sans)">
     <div id="root"></div>
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
@@ -53,19 +53,37 @@
         return React.createElement(
           as,
           {
-            className: `${textVariants[variant]} ${className}`,
+            className: `${textVariants[variant]} ${className ? className : ""}`,
             ...props,
           },
           children
         );
       }
 
-      function App() {
+      const buttonVariants = {
+        default: "bg-(--background)",
+        primary: "bg-(--primary)",
+      };
+      function Button({ variant = "default", className, children, ...props }) {
         return (
-          <main className="py-28 px-4">
-            <Text>Hello World</Text>
-          </main>
+          <Text
+            as="button"
+            variant="heading"
+            className={`
+              flex items-center justify-center rounded-xl p-3 cursor-pointer 
+              text-(--text) bg-linear-(--gradient) 
+              hover:bg-linear-(--gradient-hover) shadow-(--shadow) ${
+                buttonVariants[variant]
+              } ${className ? className : ""}`}
+            {...props}
+          >
+            {children}
+          </Text>
         );
+      }
+
+      function App() {
+        return <main className="py-28 px-4"></main>;
       }
 
       ReactDOM.createRoot(document.getElementById("root")).render(<App />);
